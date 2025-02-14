@@ -1,5 +1,7 @@
 cd ../
 
+npm i
+
 @echo off
 set "envFile=.env"
 
