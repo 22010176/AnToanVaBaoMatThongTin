@@ -1,4 +1,4 @@
-# HƯỚNG DẪN SETUP
+## HƯỚNG DẪN SETUP
 
 Chọn một tệp tin trống. Mở nó trong vscode và clone repository về bằng lệnh: 
 ```bash
