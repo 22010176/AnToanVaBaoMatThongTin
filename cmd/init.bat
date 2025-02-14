@@ -1,7 +1,5 @@
 cd ../
 
-npm i
-
 @echo off
 set "envFile=.env"
 
@@ -27,3 +25,5 @@ rm -rf %certFolder%
 
 mkdir %certFolder%
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout %keyFile% -out %certFile%
+
+npm i
