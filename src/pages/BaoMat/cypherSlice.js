@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { getCaesarInput } from "../../redux/selectors";
-import { affineCipher, alphabetOptions, caesarCipher, desCipher, lowercaseAlphabet, number, uppercaseAlphabet, vigenereCipher } from "../../utilities/crypto";
+import { affineCipher, alphabetOptions, caesarCipher, desCipher, lowercaseAlphabet, md5Cipher, number, uppercaseAlphabet, vigenereCipher } from "../../utilities/crypto";
 import axios from "axios";
 import { findNextPrime, isPrime } from "../../utilities/number";
 import { findNextD, findNextE, findPsuedoPrime, rsaDecrypt, rsaEncrypt, rsaEnscription } from "../../utilities/rsa";
@@ -35,6 +35,13 @@ export const fetchAESDescript = createAsyncThunk(
   async (input, thunkAPI) => {
     input.key = input.key.padEnd(16)
     const result = await axios.post('api/cypher/aes/descript', input)
+    return result.data
+  }
+)
+export const getMD5 = createAsyncThunk(
+  'cypher/md5Decrypt',
+  async (input, thunkAPI) => {
+    const result = await axios.post('api/cypher/md5/descript', input)
     return result.data
   }
 )
@@ -84,6 +91,10 @@ const cypherSlice = createSlice({
     // Aes descript
     builder.addCase(fetchAESDescript.pending, PendingCypher)
     builder.addCase(fetchAESDescript.fulfilled, ModernCypher)
+
+    // md5 descript
+    builder.addCase(getMD5.pending, PendingCypher)
+    builder.addCase(getMD5.fulfilled, ModernCypher)
   },
   reducers: {
     changeCypher(state, action) {
@@ -138,6 +149,14 @@ const cypherSlice = createSlice({
           break;
       }
     },
+    md5Encrypt(state, action) {
+      state.output = md5Cipher(action.payload, true)
+    },
+    md5Decrypt(state, action) {
+      new Promise(resolve => resolve(md5Cipher(action.payload)))
+        .then(a => (state.output = a))
+    },
+
     rsaEncrypt(state) {
       state.output = rsaEnscription(state.input.message, { e: state.input.e, n: state.input.n }, true)
     },

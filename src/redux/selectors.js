@@ -76,6 +76,11 @@ export function getRSAInput(state) {
   })
 }
 
+export function getMD5Input(state) {
+  const cyp = getCypher(state).input
+  return JSON.stringify({ message: cyp.message })
+}
+
 export function getCipherInput(state) {
   const cypherName = getCypherName(state)
 
@@ -86,7 +91,8 @@ export function getCipherInput(state) {
     case 'des': return getDESInput(state)
     case 'aes': return getAESInput(state)
     case 'rsa': return getRSAInput(state)
-    default: return {}
+    case 'md5': return getMD5Input(state)
+    default: return '{}'
   }
 }
 

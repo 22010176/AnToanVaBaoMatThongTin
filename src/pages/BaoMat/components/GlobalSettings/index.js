@@ -2,7 +2,7 @@ import { Button, Flex, Select } from "antd"
 import { useDispatch, useSelector } from "react-redux"
 
 import { cypherName } from "../../../../utilities/crypto"
-import cypherSlice, { fetchAESDescript, fetchAESEnscript, fetchDESDescript, fetchDESEnscript, fetchDESResult } from "../../cypherSlice"
+import cypherSlice, { fetchAESDescript, fetchAESEnscript, fetchDESDescript, fetchDESEnscript, fetchDESResult, getMD5 } from "../../cypherSlice"
 import { getCaesarInput, getCipherInput, getCypher, getCypherName } from "../../../../redux/selectors"
 import { useCallback, useMemo } from "react"
 
@@ -33,6 +33,9 @@ function GlobalSettings({ }) {
       case 'rsa':
         dispatch(cypherSlice.actions.rsaEncrypt())
         break
+      case 'md5':
+        dispatch(cypherSlice.actions.md5Encrypt(cinput))
+        break
     }
   }
 
@@ -52,6 +55,9 @@ function GlobalSettings({ }) {
         break
       case 'rsa':
         dispatch(cypherSlice.actions.rsaDecrypt())
+        break
+      case 'md5':
+        dispatch(getMD5(cinput))
         break
     }
   }

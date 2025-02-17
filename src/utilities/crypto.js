@@ -1,6 +1,9 @@
 import CryptoJS from "crypto-js"
 import aesjs from "aes-js"
 
+import md5 from "md5"
+import ReverseMd5 from 'reverse-md5'
+
 export const cypherName = [
   { lower: 'caesar', upper: 'CAESAR', cap: 'Caesar' },
   { lower: 'affine', upper: 'AFFINE', cap: 'Affine' },
@@ -9,6 +12,7 @@ export const cypherName = [
   { lower: 'des', upper: 'DES', cap: 'DES' },
   { lower: 'aes', upper: 'AES', cap: 'AES' },
   { lower: 'rsa', upper: 'RSA', cap: 'RSA' },
+  { lower: 'md5', upper: 'MD5', cap: 'MD5' },
 ]
 
 export const alphabetOptions = ['a-z', 'A-Z', '0-9']
@@ -98,3 +102,37 @@ export function aesCipher(message = '', key = '', encode = true) {
   const result = aesCtr.decrypt(messageBytes)
   return aesjs.utils.utf8.fromBytes(result)
 }
+
+const md5Reverse = ReverseMd5({
+  lettersUpper: true,
+  lettersLower: true,
+  numbers: true,
+  special: false,
+  whitespace: true,
+  maxLen: 50
+})
+export function md5Cipher(message, encode) {
+  if (encode) return md5(message)
+  console.log({ message }, 'ddd')
+  const result = md5Reverse(message)
+  console.log(result)
+
+  return result
+}
+
+
+export function md5FileEncrypt(path) {
+
+}
+
+
+// const a = md5('test')
+// const b = ReverseMd5({
+//   lettersUpper: true,
+//   lettersLower: true,
+//   numbers: true,
+//   special: false,
+//   whitespace: true,
+//   maxLen: 1000
+// })(a)
+// console.log(a, b)

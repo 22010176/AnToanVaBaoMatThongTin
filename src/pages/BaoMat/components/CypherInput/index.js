@@ -101,28 +101,43 @@ function KeyInput() {
 }
 
 function CInput() {
+
+  let Elem
   switch (useSelector(getCypherName)) {
-    case 'caesar': return <CaesarInput />
-    case 'affine': return <AffineInput />
-    case 'hill': return <HillInput />
+    case 'caesar':
+      Elem = CaesarInput
+      break
+    case 'affine':
+      Elem = AffineInput
+      break
+    case 'hill':
+      Elem = HillInput
+      break
     case 'des':
     case 'vigenere':
-    case 'aes': return <KeyInput />
-    case 'rsa': return <RSAInput />
-    default: return <Empty />
+    case 'aes':
+      Elem = KeyInput
+      break
+    case 'rsa':
+      Elem = RSAInput
+      break
+    default: Elem = Empty
   }
+  return (
+    <div className="flex-grow">
+      <Elem />
+    </div>
+  )
 }
 
 function CypherInput() {
   return (
-    <div className='flex gap-3 justify-between border rounded-lg w-full bg-white shadow px-4 py-3'>
-      <div className="flex-grow">
-        <CInput />
-      </div>
+    useSelector(getCypherName) !== "md5" && <div className='flex gap-3 justify-between border rounded-lg w-full bg-white shadow px-4 py-3' >
+      <CInput />
       <Button size="large" className="self-center" variant="filled" color="blue">
         <FontAwesomeIcon icon={faUnlockKeyhole} />
       </Button>
-    </div>
+    </div >
   )
 }
 

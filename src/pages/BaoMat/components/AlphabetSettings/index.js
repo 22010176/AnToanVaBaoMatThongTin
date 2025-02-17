@@ -16,7 +16,7 @@ function AlphabetSettings() {
     <div className="border rounded-lg w-full p-4 bg-white shadow flex gap-3">
       <h1 className="text-xl font-bold">Alphabets:</h1>
       <Select
-        disabled={['rsa', 'aes', 'des'].includes(cipherName)}
+        disabled={['rsa', 'aes', 'des', 'md5'].includes(cipherName)}
         mode="multiple"
         className="w-full"
         defaultValue={alphabetOptions}
