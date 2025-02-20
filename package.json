@@ -5,7 +5,6 @@
     "init-window": "cd cmd && init.bat",
     "reset-window": "cd cmd && prisma-migrate.bat",
     "init-linux": "cd cmd && init.sh",
-    "migrate": "npx prisma migrate dev",
     "start": "concurrently \"webpack --watch\" \"node --watch --env-file-if-exists=.env index.js\" \"npx @tailwindcss/cli -i ./src/styles.css -o ./public/styles.bundle.css --watch\""
   },
   "keywords": [],

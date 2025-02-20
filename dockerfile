@@ -4,4 +4,7 @@ WORKDIR /src
 
 COPY . .
 
-RUN cd cmd && ./init.sh
+CMD npm run init-linux
+
+# RUN npm install
+
